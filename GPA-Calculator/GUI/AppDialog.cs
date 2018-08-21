@@ -29,20 +29,38 @@ namespace GPA_Calculator.GUI
         }
 
 
+        private bool ValidateCourses()
+        {
+            return true;
+        }
+
         private void btnCalculate_Click(object sender, EventArgs e)
         {
-            //int totalCredits = m_credits1 + m_credits2 + m_credits3;
-            //if (totalCredits <= 0)
-            //{
-            //    tbGPA.Text = "No Credits!";
-            //    return;
-            //}
+            if (!ValidateCourses())
+                return;
 
-            //double weightedGrade1 = m_credits1 * (tbGrade1.Text != "" ? double.Parse(tbGrade1.Text) : 0);
-            //double weightedGrade2 = m_credits2 * (tbGrade2.Text != "" ? double.Parse(tbGrade2.Text) : 0);
-            //double weightedGrade3 = m_credits3 * (tbGrade3.Text != "" ? double.Parse(tbGrade3.Text) : 0);
+            int totalCredits = 0;
+            for (int i = 0; i < CourseCount; i++)
+            {
+                TextBox tb = m_tbCreditsList[i];
+                totalCredits += tb.Text != Program.NULL_STR ? Convert.ToInt32(tb.Text) : 0;
+            }
+            if (totalCredits <= 0)
+            {
+                tbGPA.Text = "No Credits!";
+                return;
+            }
 
-            //tbGPA.Text = ((weightedGrade1 + weightedGrade2 + weightedGrade3) / totalCredits).ToString();
+            double totalWeightedGrade = 0;
+            for (int i = 0; i < CourseCount; i++)
+            {
+                double courseWeightedGrade = (m_tbGradeList[i].Text != Program.NULL_STR ?
+                    double.Parse(m_tbGradeList[i].Text) : 0)
+                    * (m_tbCreditsList[i].Text != Program.NULL_STR ? Convert.ToInt32(m_tbCreditsList[i].Text) : 0);
+                totalWeightedGrade += courseWeightedGrade;
+            }
+
+            tbGPA.Text = Math.Round((totalWeightedGrade / totalCredits), 3).ToString();
         }
 
         private void btnAddCourse_Click(object sender, EventArgs e)
