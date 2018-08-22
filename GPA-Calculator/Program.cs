@@ -9,9 +9,6 @@ namespace GPA_Calculator
 {
     static class Program
     {
-        public const string NULL_STR = "";
-
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

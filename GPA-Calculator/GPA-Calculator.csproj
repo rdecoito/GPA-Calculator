@@ -53,6 +53,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\FourPointGradeScale.cs" />
+    <Compile Include="Util\GradeScale.cs" />
+    <Compile Include="Util\AppUtil.cs" />
     <EmbeddedResource Include="GUI\AppDialog.resx">
       <DependentUpon>AppDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -78,5 +81,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
